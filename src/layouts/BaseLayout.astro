@@ -1,0 +1,14 @@
+---
+import SEO from '../components/SEO.astro'
+import Navbar from '../components/Navbar.astro'
+import Footer from '../components/Footer.astro'
+import '../styles/global.css'
+const { title, description, image, canonical, noindex } = Astro.props
+---
+<SEO {title} {description} {image} {canonical} {noindex}>
+<Navbar />
+<main>
+<slot />
+</main>
+<Footer />
+</SEO>

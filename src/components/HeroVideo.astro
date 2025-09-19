@@ -1,0 +1,60 @@
+---
+interface Props {
+  headline?: string;
+  sub?: string;
+}
+
+const {
+  headline = "La pieza clave en su proyecto",
+  sub = "Gestión integral de proyectos con visión estratégica, eficiencia y resultados de alto impacto.",
+} = Astro.props as Props;
+---
+
+<section aria-label="Video de portada" class="relative bg-black w-screen overflow-hidden">
+  <div class="relative w-full h-[52svh] md:h-[70svh] lg:h-[80svh] overflow-hidden">
+    
+    <!-- Video local (solo WebM) -->
+    <video
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+      class="absolute top-0 left-0 w-full h-full object-cover"
+      poster="/video/hero-poster.jpg"
+    >
+      <source src="/video/hero-bg.webm" type="video/webm" />
+      <!-- Fallback visual si el navegador no soporta video -->
+      <div class="absolute inset-0 bg-black flex items-center justify-center">
+        <p class="text-white text-opacity-70">Tu navegador no soporta video. Considera actualizarlo.</p>
+      </div>
+    </video>
+
+    <!-- Degradado para mejorar contraste del texto -->
+    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent"></div>
+
+    <!-- Contenido centrado -->
+    <div class="absolute inset-0 flex items-end md:items-center">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-10 md:pb-0">
+        <div class="max-w-3xl text-white">
+          <h1 class="text-3xl md:text-5xl font-bold tracking-tight drop-shadow-lg">{headline}</h1>
+          <p class="mt-3 text-base md:text-lg opacity-90 drop-shadow-md">{sub}</p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a 
+              href="/servicios" 
+              class="rounded-xl bg-white/95 text-neutral-900 px-4 py-2.5 text-sm font-semibold hover:bg-white transition-all duration-300 ease-out shadow-lg hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+            >
+              Ver servicios
+            </a>
+            <a 
+              href="/contacto" 
+              class="rounded-xl bg-neutral-900/70 text-white px-4 py-2.5 text-sm font-semibold ring-1 ring-white/30 hover:bg-neutral-900/80 transition-all duration-300 ease-out backdrop-blur-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+            >
+              Contacto
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

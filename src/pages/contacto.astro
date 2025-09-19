@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+---
+<BaseLayout title="Contacto — Arquimétrica" description="Conversemos su proyecto y definamos próximos pasos.">
+<section class="container-px py-16">
+<h1 class="text-3xl font-bold text-[var(--navy)]">Contacto</h1>
+<form class="mt-8 grid gap-4 max-w-xl">
+<input required placeholder="Nombre" class="border rounded-lg px-4 py-3" />
+<input required type="email" placeholder="Correo" class="border rounded-lg px-4 py-3" />
+<textarea required placeholder="Cuéntenos sobre su proyecto" rows={5} class="border rounded-lg px-4 py-3"></textarea>
+<button class="btn-primary">Enviar</button>
+</form>
+</section>
+</BaseLayout>

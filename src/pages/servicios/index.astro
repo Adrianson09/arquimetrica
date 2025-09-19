@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+---
+<BaseLayout title="Servicios — Arquimétrica" description="Proceso integral llave en mano: del papel a la realidad.">
+<section class="container-px py-16">
+<h1 class="text-3xl font-bold text-[var(--navy)]">Servicios</h1>
+<div class="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+{["Anteproyecto, Diseño & Planos","Gestión BIM","Gestión de permisos","Análisis de factibilidad","Presupuestos detallados","Avalúos","Construcción & Remodelación","Gerencia de proyectos"].map((s)=> (
+<article class="rounded-2xl border border-slate-200 p-6 bg-white">
+<h3 class="font-semibold text-[var(--azul)]">{s}</h3>
+<p class="mt-2 text-slate-700">Descripción corta del servicio y beneficios para el cliente.</p>
+</article>
+))}
+</div>
+</section>
+</BaseLayout>

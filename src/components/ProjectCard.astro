@@ -1,0 +1,12 @@
+---
+interface Props{ title:string; location:string; year:string; service:string; image:ImageMetadata }
+const { title, location, year, service, image } = Astro.props as Props
+import { Image } from 'astro:assets'
+---
+<article class="group overflow-hidden rounded-2xl bg-white shadow ring-1 ring-slate-200 hover:shadow-lg transition">
+<Image src={image} alt={title} format="webp" widths={[480,768,1200]} class="h-60 w-full object-cover" />
+<div class="p-5">
+<h3 class="text-xl font-semibold text-[var(--navy)] group-hover:underline">{title}</h3>
+<p class="mt-1 text-sm text-slate-600">{location} · {year} · {service}</p>
+</div>
+</article>
