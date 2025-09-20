@@ -3,14 +3,111 @@ import BaseLayout from '../layouts/BaseLayout.astro'
 const TITLE = 'Quiénes somos — Arquimétrica'
 const DESC = 'Firma especializada en gestión integral de proyectos para la industria inmobiliaria en Costa Rica.'
 ---
+
 <BaseLayout title={TITLE} description={DESC} canonical="https://arquimetrica.cr/quienes-somos">
-<section class="container-px py-16 prose max-w-none">
-<h1>Quiénes somos</h1>
-<p>Arquimétrica es una firma especializada en gestión integral de proyectos que ofrece múltiples servicios para la industria inmobiliaria. Trabajamos con enfoque estratégico, visión de negocio y compromiso con la excelencia.</p>
-<h2>Equipo</h2>
-<ul>
-<li><strong>Arq. Melissa Delgado Zúñiga</strong> — Máster en BIM Management, Directora, CFIA A-35261.</li>
-<li><strong>Arq. Adrián Bolaños Mora</strong> — Máster en Administración de Empresas, Director, CFIA A-35220.</li>
-</ul>
-</section>
+  <!-- Sección 1: Introducción -->
+  <section class="relative bg-[var(--azul)] text-white py-20">
+    <div class="container-px">
+      <div class="grid md:grid-cols-2 gap-10 items-center">
+        <div>
+          <h1 class="text-4xl md:text-5xl font-bold mb-6">Quiénes somos</h1>
+          <p class="text-lg leading-relaxed mb-6">
+            Arquimétrica es una firma especializada en gestión integral de proyectos que ofrece múltiples servicios para la industria inmobiliaria.
+          </p>
+          <p class="text-lg leading-relaxed mb-6">
+            Nos distinguimos por nuestro servicio bajo un enfoque estratégico, visión de negocio y compromiso con la excelencia en cada etapa del proyecto.
+          </p>
+          <p class="text-lg leading-relaxed">
+            Operamos bajo la razón social Servicios Inmobiliarios La Aurora S.A., registrada en Costa Rica con cédula jurídica 3-101-803258, y acreditada ante el Colegio Federado de Ingenieros y de Arquitectos (CFIA) con número de registro CC-09929.
+          </p>
+        </div>
+        <div class="relative h-80 md:h-96 rounded-2xl overflow-hidden shadow-2xl">
+            <img 
+                src="/images/quienes-somos/puzzle.png"    
+                alt="Pieza clave en el rompecabezas de tu proyecto" 
+                class="w-full h-full object-cover"
+            />
+            
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección 2: Propósito y Compromisos -->
+  <section class="py-16 bg-white">
+    <div class="container-px">
+      <div class="max-w-4xl mx-auto text-center mb-12">
+        <h2 class="text-3xl font-bold text-[var(--navy)]">Propósito y Compromisos</h2>
+      </div>
+      <div class="max-w-4xl mx-auto text-slate-700 leading-relaxed">
+        <p class="mb-6">
+          Creemos en el potencial de proyectos que generan entornos más humanos, eficientes y sostenibles, que respondan de forma coherente a las necesidades de las distintas partes interesadas.
+        </p>
+        <p class="mb-6">
+          Actuamos comprometidos con una visión estratégica, sensibilidad social, y criterio técnico, entendiendo que cada intervención es una oportunidad para crear valor duradero en las personas, comunidades y organizaciones a las que servimos.
+        </p>
+        <p class="mb-6">
+          Nos mueve la búsqueda de soluciones integrales, responsables y adaptables, cultivando relaciones de confianza y constante colaboración, asumiendo cada uno de los proyectos con ética, responsabilidad y profesionalismo.
+        </p>
+        <p class="mb-6">
+          Nuestro compromiso es proponer, dirigir y construir espacios donde las ideas se transforman en realidades con propósito.
+        </p>
+      </div>
+      <div class="mt-12 flex justify-center">
+        <img 
+          src="/images/quienes-somos/ciudad-lineal.png" 
+          alt="Ciudad conceptual en línea" 
+          class="w-full max-w-3xl h-auto"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección 3: Equipo -->
+  <section class="py-16 bg-[var(--light)]">
+    <div class="container-px">
+      <div class="max-w-4xl mx-auto text-center mb-12">
+        <h2 class="text-3xl font-bold text-[var(--navy)]">Equipo</h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-10 items-start">
+        <!-- Melissa Delgado -->
+        <div class="flex flex-col md:flex-row gap-8">
+          <div class="flex-1">
+            <h3 class="text-xl font-bold text-[var(--navy)] mb-2">Arq. Melissa Delgado Zúñiga</h3>
+            <p class="font-semibold text-[var(--azul)] mb-2">Máster en BIM Management | Zigurat Institute of Technology & Universitat de Barcelona</p>
+            <p class="font-semibold text-[var(--azul)] mb-3">Directora | Código CFIA: A-35261</p>
+            <p class="text-slate-700 leading-relaxed">
+              Experiencia y enfoque en diseño, elaboración de planos constructivos, gestión de permisos e inspección de obra. Especializada en metodología BIM Management, lo que le permite coordinar procesos con precisión y entregar soluciones integrales, eficientes y adaptadas a la necesidad de cada proyecto.
+            </p>
+          </div>
+          <div class="flex-shrink-0">
+            <img 
+              src="/images/quienes-somos/melissa.jpg" 
+              alt="Arq. Melissa Delgado Zúñiga" 
+              class="w-48 h-64 object-cover rounded-xl border-2 border-[var(--azul)]"
+            />
+          </div>
+        </div>
+
+        <!-- Adrián Bolaños -->
+        <div class="flex flex-col md:flex-row gap-8">
+          <div class="flex-1">
+            <h3 class="text-xl font-bold text-[var(--navy)] mb-2">Arq. Adrián Bolaños Mora</h3>
+            <p class="font-semibold text-[var(--azul)] mb-2">Máster en Administración de Empresas | INCAE Business School</p>
+            <p class="font-semibold text-[var(--azul)] mb-3">Director | Código CFIA: A-35220</p>
+            <p class="text-slate-700 leading-relaxed">
+              Experiencia y enfoque en negocios, desarrollo y administración de proyectos. Especializado en la gestión de las diferentes fases del proyecto, a través del liderazgo estratégico, pensamiento analítico y enfoque en resultados, asegurando valor y calidad.
+            </p>
+          </div>
+          <div class="flex-shrink-0">
+            <img 
+              src="/images/quienes-somos/adrian.jpg" 
+              alt="Arq. Adrián Bolaños Mora" 
+              class="w-48 h-64 object-cover rounded-xl border-2 border-[var(--azul)]"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
