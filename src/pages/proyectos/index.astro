@@ -1,14 +1,286 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
+const TITLE = 'Proyectos — Arquimétrica'
+const DESC = 'Proyectos completados y en proceso: desde diseño hasta construcción.'
 ---
-<BaseLayout title="Proyectos — Arquimétrica" description="Selección de obras y residencias desarrolladas.">
-<section class="container-px py-16">
-<h1 class="text-3xl font-bold text-[var(--navy)]">Proyectos</h1>
-<div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-<!-- Reemplazar por data real -->
-<div class="h-72 bg-slate-100 rounded-2xl" />
-<div class="h-72 bg-slate-100 rounded-2xl" />
-<div class="h-72 bg-slate-100 rounded-2xl" />
-</div>
-</section>
+
+<BaseLayout title={TITLE} description={DESC}>
+  <!-- Hero Section: Fondo Azul Sólido -->
+  <section class="relative bg-[var(--azul)] text-white py-20">
+    <div class="container-px text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Proyectos</h1>
+      <p class="text-xl max-w-3xl mx-auto leading-relaxed">
+        Nuestros proyectos reflejan compromiso, innovación y excelencia técnica.
+      </p>
+      <p class="mt-2 text-lg max-w-2xl mx-auto opacity-90">
+        Desde diseño hasta construcción, cada espacio es una obra de arte funcional.
+      </p>
+    </div>
+  </section>
+
+  <!-- Galería de Proyectos -->
+  <section class="py-16 bg-white">
+    <div class="container-px">
+      <div class="grid md:grid-cols-2 gap-12">
+        {[
+          {
+            id: "puntarenas-quepos-casa-manglar",
+            title: "Casa Manglar Quepos",
+            size: "460m²",
+            year: "2025",
+            phase: "Diseño y Planos",
+            status: "En Proceso",
+            location: "Puntarenas, Quepos",
+            images: [
+              "/images/proyectos/puntarenas-quepos-casa-manglar-1.jpg",
+              "/images/proyectos/puntarenas-quepos-casa-manglar-2.jpg",
+              "/images/proyectos/puntarenas-quepos-casa-manglar-3.jpg",
+              "/images/proyectos/puntarenas-quepos-casa-manglar-4.jpg",
+              "/images/proyectos/puntarenas-quepos-casa-manglar-5.jpg",
+              "/images/proyectos/puntarenas-quepos-casa-manglar-6.jpg",
+              "/images/proyectos/puntarenas-quepos-casa-manglar-7.jpg",
+            ]
+          },
+          {
+            id: "residencia-uvita-1",
+            title: "Residencia Uvita #1",
+            size: "400m²",
+            year: "2022",
+            phase: "Diseño y Planos",
+            status: "Construido",
+            location: "Puntarenas, Uvita",
+            images: [
+              "/images/proyectos/residencia-uvita-1-1.jpg",
+              "/images/proyectos/residencia-uvita-1-2.jpg",
+              "/images/proyectos/residencia-uvita-1-planos.png"
+            ]
+          },
+          {
+            id: "residencia-bd",
+            title: "Residencia BD",
+            size: "240m²",
+            year: "2021",
+            phase: "Diseño y Planos",
+            status: "Construido",
+            location: "San José, Vázquez de Coronado",
+            images: [
+              "/images/proyectos/residencia-bd-1.jpg",
+              "/images/proyectos/residencia-bd-2.jpg",
+              "/images/proyectos/residencia-bd-planos.png"
+            ]
+          },
+          {
+            id: "residencia-siles-gamboa",
+            title: "Residencia Siles Gamboa",
+            size: "350m²",
+            year: "2022",
+            phase: "Interiorismo & Remodelación",
+            status: "Construido",
+            location: "Heredia, Condominio Bosques de Velarde",
+            images: [
+              "/images/proyectos/residencia-siles-gamboa-1.jpg",
+              "/images/proyectos/residencia-siles-gamboa-2.jpg",
+              "/images/proyectos/residencia-siles-gamboa-planos.png"
+            ]
+          }
+        ].map((project) => (
+          <div 
+            key={project.id} 
+            class="bg-gray-50 rounded-2xl overflow-hidden shadow-lg border border-slate-200 hover:shadow-xl transition-shadow duration-300"
+          >
+            <!-- Título y datos -->
+            <div class="p-6 bg-white">
+              <h3 class="text-xl font-bold text-[var(--navy)]">{project.title}</h3>
+              <div class="mt-2 flex flex-wrap gap-2 text-sm text-slate-600">
+                <span>{project.size}</span>
+                <span>•</span>
+                <span>{project.year}</span>
+                <span>•</span>
+                <span>{project.phase}</span>
+                <span>•</span>
+                <span class="font-medium">{project.status}</span>
+                <span>•</span>
+                <span>{project.location}</span>
+              </div>
+            </div>
+
+            <!-- Imagen principal -->
+            <div class="relative h-80 overflow-hidden">
+              <img 
+                src={project.images[0]} 
+                alt={project.title} 
+                class="w-full h-full object-cover transition-transform duration-500 hover:scale-105 cursor-pointer"
+                id={`main-image-${project.id}`}
+                data-project-id={project.id}
+                data-images={project.images.join('|')}
+                data-index="0"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-black/20 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+            </div>
+
+            <!-- Mini galería (scroll horizontal con flechas) -->
+            <div class="relative bg-white">
+              <!-- Botón Izquierda -->
+              <button
+                class="absolute left-2 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white/80 border border-slate-200 shadow-sm p-2 hover:bg-white"
+                aria-label="Imagen anterior"
+                data-role="thumb-prev"
+                data-strip-id={`strip-${project.id}`}
+              >
+                ‹
+              </button>
+
+              <!-- Tira de thumbnails -->
+              <div 
+                id={`strip-${project.id}`}
+                class="flex gap-2 p-4 overflow-x-auto snap-x snap-mandatory scroll-px-4"
+                data-role="thumb-strip"
+              >
+                {project.images.map((img, i) => (
+                  <img 
+                    key={i} 
+                    src={img} 
+                    alt={`Imagen ${i+1} de ${project.title}`} 
+                    class={`inline-block w-20 h-16 md:w-24 md:h-20 object-cover rounded-lg cursor-pointer transition-all duration-300 snap-start
+                      ${i === 0 ? 'ring-2 ring-[var(--azul)]' : 'hover:ring-2 hover:ring-[var(--azul)]'}`}
+                    data-role="thumb"
+                    data-project-id={project.id}
+                    data-image-index={i}
+                    data-main-image-id={`main-image-${project.id}`}
+                    loading="lazy"
+                  />
+                ))}
+              </div>
+
+              <!-- Botón Derecha -->
+              <button
+                class="absolute right-2 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white/80 border border-slate-200 shadow-sm p-2 hover:bg-white"
+                aria-label="Siguiente imagen"
+                data-role="thumb-next"
+                data-strip-id={`strip-${project.id}`}
+              >
+                ›
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Botón para ver más -->
+      <div class="mt-12 text-center">
+        <a 
+          href="/proyectos" 
+          class="inline-block rounded-xl bg-[var(--azul)] px-8 py-3 text-white font-semibold hover:bg-[var(--azul-oscuro)] transition-all duration-300 shadow-md hover:shadow-lg"
+        >
+          Ver todos los proyectos
+        </a>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // --- Utilidades ---
+    const selectThumb = (thumb) => {
+      const strip = thumb.closest('[data-role="thumb-strip"]');
+      if (!strip) return;
+      strip.querySelectorAll('[data-role="thumb"]').forEach(t => {
+        t.classList.remove('ring-2','ring-[var(--azul)]');
+        t.classList.add('hover:ring-2','hover:ring-[var(--azul)]');
+      });
+      thumb.classList.add('ring-2','ring-[var(--azul)]');
+      thumb.classList.remove('hover:ring-2','hover:ring-[var(--azul)]');
+    };
+
+    const swapMainImage = (mainImage, newSrc, newIndex, thumbToSelect) => {
+      if (!mainImage) return;
+      mainImage.style.transition = 'opacity 180ms ease';
+      mainImage.style.opacity = '0';
+
+      setTimeout(() => {
+        mainImage.src = newSrc;
+        mainImage.dataset.index = String(newIndex);
+        mainImage.onload = () => { mainImage.style.opacity = '1'; };
+        if (thumbToSelect) selectThumb(thumbToSelect);
+      }, 180);
+    };
+
+    const getImagesArray = (mainImage) =>
+      (mainImage.getAttribute('data-images') || '')
+        .split('|')
+        .filter(Boolean);
+
+    // --- Click en miniaturas (delegación global) ---
+    document.addEventListener('click', (e) => {
+      // Thumbnails
+      const thumb = e.target.closest('[data-role="thumb"]');
+      if (thumb) {
+        const mainImageId = thumb.getAttribute('data-main-image-id');
+        const mainImage = document.getElementById(mainImageId);
+        const newSrc = thumb.getAttribute('src');
+        const newIndex = parseInt(thumb.getAttribute('data-image-index') || '0', 10);
+        swapMainImage(mainImage, newSrc, newIndex, thumb);
+        return;
+      }
+
+      // Botones de scroll
+      const prevBtn = e.target.closest('[data-role="thumb-prev"]');
+      const nextBtn = e.target.closest('[data-role="thumb-next"]');
+      if (prevBtn || nextBtn) {
+        const stripId = (prevBtn || nextBtn).getAttribute('data-strip-id');
+        const strip = document.getElementById(stripId);
+        if (strip) {
+          const delta = Math.round(strip.clientWidth * 0.85);
+          strip.scrollBy({ left: prevBtn ? -delta : delta, behavior: 'smooth' });
+        }
+        return;
+      }
+
+      // Avanzar al hacer click en la imagen principal
+      const main = e.target.closest('img[id^="main-image-"]');
+      if (main) {
+        const imgs = getImagesArray(main);
+        if (!imgs.length) return;
+        const current = parseInt(main.dataset.index || '0', 10);
+        const next = (current + 1) % imgs.length;
+        const newSrc = imgs[next];
+
+        // Encontrar el thumb correspondiente para marcarlo
+        const projectId = main.getAttribute('data-project-id');
+        const strip = document.querySelector(`#strip-${projectId}`);
+        const thumbToSelect = strip?.querySelector(`[data-role="thumb"][data-image-index="${next}"]`) || null;
+
+        swapMainImage(main, newSrc, next, thumbToSelect);
+
+        // Asegurar que el thumb seleccionado quede a la vista
+        if (thumbToSelect) {
+          thumbToSelect.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        }
+      }
+    });
+
+    // Accesibilidad: activar thumbs con Enter/Espacio
+    document.querySelectorAll('[data-role="thumb"]').forEach((el) => {
+      el.setAttribute('tabindex', '0');
+      el.setAttribute('role', 'button');
+      el.addEventListener('keydown', (ev) => {
+        if (ev.key === 'Enter' || ev.key === ' ') {
+          ev.preventDefault();
+          el.click();
+        }
+      });
+    });
+
+    // Mejora UX: scroll con rueda del ratón horizontal en la tira de thumbs
+    document.querySelectorAll('[data-role="thumb-strip"]').forEach(strip => {
+      strip.addEventListener('wheel', (ev) => {
+        if (Math.abs(ev.deltaY) > Math.abs(ev.deltaX)) {
+          ev.preventDefault();
+          strip.scrollBy({ left: ev.deltaY, behavior: 'smooth' });
+        }
+      }, { passive: false });
+    });
+  });
+</script>
