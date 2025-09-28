@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<BaseLayout title={post.data.title} description={post.data.description}>
+  <article class="container-px py-16 max-w-3xl md:max-w-4xl mx-auto">
+    {post.data.coverImage && (
+      <figure class="mb-8">
+        <img
+          src={post.data.coverImage}   {/* ← ya es /blog/bim-portada.jpg */}
+          alt={post.data.title}
+          class="w-full h-64 md:h-80 object-cover rounded-2xl shadow"
+          loading="eager"
+        />
+        {post.data.description && (
+          <figcaption class="mt-2 text-center text-sm text-slate-600">
+            {post.data.description}
+          </figcaption>
+        )}
+      </figure>
+    )}
+
+    <header class="text-center">
+      <h1 class="text-4xl md:text-5xl font-bold text-[var(--navy)] leading-tight">{post.data.title}</h1>
+      <time class="block mt-3 text-slate-500">
+        {post.data.date.toLocaleDateString('es-CR')}
+      </time>
+    </header>
+
+    <div class="mt-10 prose prose-lg mx-auto dark:prose-invert
+                prose-headings:text-[var(--navy)]
+                prose-a:text-[var(--azul)] hover:prose-a:underline
+                prose-figcaption:text-slate-600
+                prose-img:rounded-xl prose-img:shadow-lg prose-img:mx-auto
+                prose-li:marker:text-[var(--azul)]">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>

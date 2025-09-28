@@ -1,19 +1,97 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro'
-import { getCollection } from 'astro:content'
-const posts = await getCollection('blog')
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog'))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
-<BaseLayout title="Blog — Arquimétrica" description="Ideas, experiencias y mejores prácticas de arquitectura y gestión de proyectos.">
-<section class="container-px py-16">
-<h1 class="text-3xl font-bold text-[var(--navy)]">Blog</h1>
-<div class="mt-8 grid md:grid-cols-2 gap-8">
-{posts.map(p => (
-<article class="rounded-2xl border border-slate-200 p-6 bg-white">
-<a href={`/blog/${p.slug}`} class="text-2xl font-semibold text-[var(--azul)] hover:underline">{p.data.title}</a>
-<p class="mt-2 text-slate-700">{p.data.description}</p>
-<p class="mt-2 text-sm text-slate-500">{new Date(p.data.date).toLocaleDateString('es-CR')}</p>
-</article>
-))}
-</div>
-</section>
+
+<BaseLayout 
+  title="Blog — Arquimétrica" 
+  description="Ideas, experiencias y mejores prácticas de arquitectura y gestión de proyectos."
+>
+  <!-- Hero -->
+  <section class="relative bg-[var(--azul)] text-white py-20">
+    <div class="container-px text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Blog</h1>
+      <p class="text-xl max-w-3xl mx-auto leading-relaxed">
+        Ideas, experiencias y mejores prácticas que aplicamos en arquitectura y gestión de proyectos.
+      </p>
+      <p class="mt-2 text-lg max-w-2xl mx-auto opacity-90">
+        Desde BIM hasta planificación estratégica, compartimos conocimiento que transforma proyectos.
+      </p>
+    </div>
+  </section>
+
+  <!-- Listado de posts -->
+  <section class="container-px py-16">
+    <div class="mt-10 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+      {posts.length > 0 ? (
+        posts.map((p) => {
+          const cover =
+            typeof p.data.coverImage === 'string'
+              ? p.data.coverImage
+              : p.data.coverImage?.src;
+
+          return (
+            <article
+              key={p.id}
+              class="relative group rounded-2xl border border-slate-200 overflow-hidden bg-white shadow-sm hover:shadow-md transition"
+            >
+              {/* Imagen de portada opcional */}
+              {cover && (
+                <a href={`/blog/${p.slug}`} aria-label={`Abrir: ${p.data.title}`}>
+                  <img
+                    src={cover}
+                    alt={p.data.title}
+                    class="h-44 w-full object-cover"
+                    loading="lazy"
+                  />
+                </a>
+              )}
+
+              <div class="p-6">
+                <a
+                  href={`/blog/${p.slug}`}
+                  class="text-2xl font-semibold text-[var(--navy)] group-hover:underline"
+                >
+                  {p.data.title}
+                </a>
+
+                {p.data.description && (
+                  <p class="mt-2 text-slate-700 line-clamp-3">
+                    {p.data.description}
+                  </p>
+                )}
+
+                <p class="mt-3 text-sm text-slate-500">
+                  {p.data.date.toLocaleDateString('es-CR')}
+                </p>
+
+                {p.data.tags?.length > 0 && (
+                  <div class="mt-4 flex flex-wrap gap-2">
+                    {p.data.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        class="text-xs px-2 py-1 rounded-full border border-slate-200 bg-slate-50"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+
+                {/* Link invisible para hacer clickable toda la tarjeta */}
+                <a href={`/blog/${p.slug}`} class="absolute inset-0" aria-label={`Leer ${p.data.title}`}></a>
+              </div>
+            </article>
+          );
+        })
+      ) : (
+        <p class="col-span-full text-center text-slate-500">
+          Próximamente publicaremos artículos.
+        </p>
+      )}
+    </div>
+  </section>
 </BaseLayout>
